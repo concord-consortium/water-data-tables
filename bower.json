@@ -1,0 +1,29 @@
+{
+  "name": "data-tables",
+  "version": "0.1.0",
+  "authors": [
+    "Scott Cytacki <scytacki@concord.org>"
+  ],
+  "description": "Tables and Graphs Interactives",
+  "main": "index.html",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "interactive"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Chart.js": "~1.0.2",
+    "handsontable": "~0.18.0"
+  }
+}
