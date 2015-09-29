@@ -24,6 +24,7 @@
   ],
   "dependencies": {
     "Chart.js": "~1.0.2",
-    "handsontable": "~0.18.0"
+    "handsontable": "~0.18.0",
+    "shutterbug": "~0.5.7"
   }
 }
