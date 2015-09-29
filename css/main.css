@@ -1,5 +1,5 @@
 body {
-  font-size: 16pt;
+  font-size: 14pt;
   font-family: Verdana, Geneva, sans-serif;
 }
 
@@ -7,8 +7,22 @@ body {
 	line-height: 1;
 }
 
+#chart-container {
+	width: 940px;
+}
+
+#myChart {
+	padding: 5px;
+}
+
+#legend {
+	float: right;
+}
+
 ul.bar-legend {
 	list-style-type: none;
+	font-size: smaller;
+	padding-left: 0px;
 }
 
 ul.bar-legend li span {
