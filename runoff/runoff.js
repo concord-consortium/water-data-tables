@@ -39,6 +39,7 @@ var hot = new Handsontable(container, {
   contextMenu: true,
   colWidths: [250, 250, 200, 200],
   colHeaders: headings,
+  columns: [{readOnly: true},{},{},{}],
   rowHeaders: false,
   allowInsertRow: false,
   minSpareRows: 0,
