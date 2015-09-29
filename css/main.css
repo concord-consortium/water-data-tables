@@ -8,7 +8,7 @@ body {
 }
 
 #chart-container {
-	width: 940px;
+	width: 900px;
 }
 
 #myChart {
@@ -29,4 +29,5 @@ ul.bar-legend li span {
 	width: 1em;
 	height: 1em;
 	display: inline-block;
+	margin-right: 5px;
 };
