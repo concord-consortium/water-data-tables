@@ -1,0 +1,18 @@
+body {
+  font-size: 16pt;
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+.handsontable th, .handsontable td {
+	line-height: 1;
+}
+
+ul.bar-legend {
+	list-style-type: none;
+}
+
+ul.bar-legend li span {
+	width: 1em;
+	height: 1em;
+	display: inline-block;
+};
