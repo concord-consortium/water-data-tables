@@ -1,7 +1,11 @@
-function setupBarGraph(data, labels, headings, headingWidths, dataSetColors) {
+function setupBarGraph(data, labels, headings, headingWidths, firstDataColumn, dataSetColors) {
   initializeTableData(data, labels, headings.length - 1);
 
   var container = document.getElementById('example');
+  var columnConfigs = [{readOnly: true}];
+  for(var i=1; i<headings.length; i++){
+    columnConfigs.push({});
+  }
   var hot = new Handsontable(container, {
     data: data,
     minSpareRows: 1,
@@ -10,7 +14,7 @@ function setupBarGraph(data, labels, headings, headingWidths, dataSetColors) {
     contextMenu: true,
     colWidths: headingWidths,
     colHeaders: headings,
-    columns: [{readOnly: true},{},{},{}],
+    columns: columnConfigs,
     rowHeaders: false,
     allowInsertRow: false,
     minSpareRows: 0,
@@ -59,8 +63,8 @@ function setupBarGraph(data, labels, headings, headingWidths, dataSetColors) {
   function setupDatasetConfigs(){
     var datasetConfigs = [];
     var config;
-    for(var i=1; i<headings.length; i++){
-      config = initializeChartDataset(headings[i], dataSetColors[i-1], labels.length);
+    for(var i=firstDataColumn; i<headings.length; i++){
+      config = initializeChartDataset(headings[i], dataSetColors[i-firstDataColumn], labels.length);
       datasetConfigs.push(config);
     }
     return datasetConfigs;
@@ -99,8 +103,8 @@ function setupBarGraph(data, labels, headings, headingWidths, dataSetColors) {
     // update the data sections of the chartData.datasets
     // recreate the chart
     data.forEach(function(row, index){
-      for(var i=1; i<headings.length; i++){
-        myNewChart.datasets[i-1].bars[index].value = convertValue(row[i]);
+      for(var i=firstDataColumn; i<headings.length; i++){
+        myNewChart.datasets[i-firstDataColumn].bars[index].value = convertValue(row[i]);
       }
     });
 

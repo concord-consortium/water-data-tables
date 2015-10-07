@@ -8,7 +8,15 @@ body {
 }
 
 #chart-container {
-	width: 900px;
+	width: 740px;
+	padding-right: 160px;
+	position: relative
+}
+
+.three-chart-container {
+	width: 300px;
+	position: relative;
+	float: left;
 }
 
 #myChart {
@@ -16,7 +24,9 @@ body {
 }
 
 #legend {
-	float: right;
+	position: absolute;
+	top: 0px;
+	right: 0px;
 }
 
 ul.bar-legend {
@@ -30,4 +40,24 @@ ul.bar-legend li span {
 	height: 1em;
 	display: inline-block;
 	margin-right: 5px;
-};
+}
+
+.yAxisLabel {
+  -ms-transform: rotate(270deg); /* IE 9 */
+  transform: rotate(270deg);
+  width: 410px;
+  position: absolute;
+  left: -200px;
+  bottom: 210px;
+  text-align: center;
+  float: left;
+}
+
+canvas.chart {
+	margin-left: 1.1em;
+}
+
+.xAxisLabel {
+	width: 100%;
+	text-align: center;
+}
