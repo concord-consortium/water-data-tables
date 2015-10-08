@@ -1,49 +1,13 @@
-function setupBarGraph(data, labels, headings, headingWidths, firstDataColumn, dataSetColors) {
-  initializeTableData(data, labels, headings.length - 1);
-
-  var container = document.getElementById('example');
-  var columnConfigs = [{readOnly: true}];
-  for(var i=1; i<headings.length; i++){
-    columnConfigs.push({});
-  }
-  var hot = new Handsontable(container, {
-    data: data,
-    minSpareRows: 1,
-    rowHeaders: true,
-    colHeaders: true,
-    contextMenu: true,
-    colWidths: headingWidths,
-    colHeaders: headings,
-    columns: columnConfigs,
-    rowHeaders: false,
-    allowInsertRow: false,
-    minSpareRows: 0,
-    afterChange: function (change, type) {
-      // example 'change' [4,4,776,"773"]
-      // row, col, oldVal, newVal
-      // type: 'edit'
-      // Because we don't care much about speed
-      // it is probably easiest to just go through all of the data and update
-      // the chart
-      // because in some cases we might need to update the chart from a single
-      // data source it might be best to put this in a function that clears all
-      // chart data first and then updates the values
-      updateData();
-    }
-  });
-
-  function initializeTableData(data, labels, numValues) {
-    labels.forEach(function(label){
-      row = [label]
-      for(var i=0; i<numValues; i++){
-        row.push(null);
-      }
-      data.push(row);
-    });
-  }
-
-
-  // numValues = 12
+/**
+   data
+   columnIndices - [1,2,3]
+   headings
+   dataSetColors
+   numRows - labels.length
+   chartElement - document.getElementById("myChart")
+   legendElement - document.getElementById("legend")
+ */
+function setupBarChart(options) {
   function initializeChartDataset(label, color, numValues) {
     var data = [];
     for(var i=0; i<numValues; i++){
@@ -63,10 +27,11 @@ function setupBarGraph(data, labels, headings, headingWidths, firstDataColumn, d
   function setupDatasetConfigs(){
     var datasetConfigs = [];
     var config;
-    for(var i=firstDataColumn; i<headings.length; i++){
-      config = initializeChartDataset(headings[i], dataSetColors[i-firstDataColumn], labels.length);
+
+    options.columnIndices.forEach(function(colIndex, datasetIndex){
+      config = initializeChartDataset(headings[colIndex], options.dataSetColors[datasetIndex], options.numRows);
       datasetConfigs.push(config);
-    }
+    });
     return datasetConfigs;
   }
 
@@ -77,14 +42,13 @@ function setupBarGraph(data, labels, headings, headingWidths, firstDataColumn, d
       datasets: setupDatasetConfigs()
   };
 
-  var ctx = document.getElementById("myChart").getContext("2d");
+  var ctx = options.chartElement.getContext("2d");
   var myNewChart = new Chart(ctx).Bar(chartData1);
 
-  document.getElementById("legend").innerHTML = myNewChart.generateLegend();
+  if(options.legendElement != null) {
+    options.legendElement.innerHTML = myNewChart.generateLegend();
+  }
 
-  // Ugh so I'm going to have to sync the bars with the
-  // the table, it seems chart.js isn't good at this but perhaps
-  // handsontable is...
   function convertValue(value) {
     if(value == null){
       return value;
@@ -96,20 +60,77 @@ function setupBarGraph(data, labels, headings, headingWidths, firstDataColumn, d
     return result;
   }
 
-  function updateData() {
-    if(myNewChart == null) {
-      return;
-    }
+  if(myNewChart == null) {
+    return null;
+  }
+
+  myNewChart.updateFromData = function() {
     // update the data sections of the chartData.datasets
     // recreate the chart
     data.forEach(function(row, index){
-      for(var i=firstDataColumn; i<headings.length; i++){
-        myNewChart.datasets[i-firstDataColumn].bars[index].value = convertValue(row[i]);
-      }
+      options.columnIndices.forEach(function(colIndex, datasetIndex){
+        myNewChart.datasets[datasetIndex].bars[index].value = convertValue(row[colIndex]);
+      });
     });
 
     myNewChart.update();
-  };
+  }
 
   return myNewChart;
+}
+
+/**
+ data
+ labels
+ headings
+ headingWidths
+ charts
+ */
+function setupTable(options) {
+  initializeTableData(options.data, options.labels, options.headings.length - 1);
+
+  var container = document.getElementById('example');
+  var columnConfigs = [{readOnly: true}];
+  for(var i=1; i<options.headings.length; i++){
+    columnConfigs.push({});
+  }
+  var hot = new Handsontable(container, {
+    data: options.data,
+    minSpareRows: 1,
+    rowHeaders: true,
+    colHeaders: true,
+    contextMenu: true,
+    colWidths: options.headingWidths,
+    colHeaders: options.headings,
+    columns: columnConfigs,
+    rowHeaders: false,
+    allowInsertRow: false,
+    minSpareRows: 0,
+    afterChange: function (change, type) {
+      // example 'change' [4,4,776,"773"]
+      // row, col, oldVal, newVal
+      // type: 'edit'
+      // Because we don't care much about speed
+      // it is probably easiest to just go through all of the data and update
+      // the chart
+      // because in some cases we might need to update the chart from a single
+      // data source it might be best to put this in a function that clears all
+      // chart data first and then updates the values
+      options.charts.forEach(function(chart){
+        chart.updateFromData();
+      })
+    }
+  });
+
+  function initializeTableData(data, labels, numValues) {
+    labels.forEach(function(label){
+      row = [label]
+      for(var i=0; i<numValues; i++){
+        row.push(null);
+      }
+      data.push(row);
+    });
+  }
+
+  return hot;
 }

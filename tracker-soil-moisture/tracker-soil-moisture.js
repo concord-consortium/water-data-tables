@@ -1,8 +1,4 @@
 var headings = [ 'Location', 'Description of Location', 'Soil Moisture'];
-var headingWidths = [100, 400, 200];
-var firstDataColumn = 2;
-var dataSetColors = [ "rgb(207, 67, 0)"];
-
 var labels = [
 'A',
 'B',
@@ -15,4 +11,22 @@ var labels = [
 
 var data = [];
 
-var barChart = setupBarGraph(data, labels, headings, headingWidths, firstDataColumn, dataSetColors);
+var charts = [
+  setupBarChart({
+    data: data,
+    headings: headings,
+    columnIndices: [2],
+    dataSetColors: [ "rgb(207, 67, 0)"],
+    numRows: labels.length,
+    chartElement: document.getElementById("myChart"),
+    legendElement: document.getElementById("legend")
+  })
+]
+
+var table = setupTable({
+  data: data,
+  headings: headings,
+  headingWidths: [100, 400, 200],
+  labels: labels,
+  charts: charts
+})

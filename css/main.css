@@ -53,6 +53,12 @@ ul.bar-legend li span {
   float: left;
 }
 
+.yAxisLabel.short {
+  width: 310px;
+  left: -150px;
+  bottom: 150px;
+}
+
 canvas.chart {
 	margin-left: 1.1em;
 }
