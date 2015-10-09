@@ -8,5 +8,5 @@ var hot = new Handsontable(document.getElementById('example'), {
   columns: [{},{}],
   rowHeaders: false,
   allowInsertRow: true,
-  minSpareRows: 0
+  minSpareRows: 1
 });
