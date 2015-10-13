@@ -1,17 +1,17 @@
 var headings = [ 'Land Cover', 'Evapotranspiration', 'Runoff', 'Infiltration'];
 var labels = [
-'LIR',
-'HIR',
-'Commercial',
-'Grassland',
+'Water',
+'Developed, Open Space',
+'Developed-Low',
+'Developed-Med',
+'Developed-High',
+'Barren Land',
 'Forest',
-'TurfGrass',
-'Pasture',
-'Row Crops',
-'Chaparral',
-'Tall Grass Prairie',
-'Short Grass Prairie',
-'Desert'
+'Shrub/Scrub',
+'Grassland',
+'Pasture/Hay',
+'Crops',
+'Wetlands'
 ]
 
 var data = [];

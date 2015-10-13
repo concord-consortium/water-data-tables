@@ -1,10 +1,10 @@
 var headings = [ 'Soil Type', 'Evapotranspiration', 'Runoff', 'Infiltration'];
 
 var labels = [
-'Sand',
-'Loam',
-'Sandy Clay',
-'Clay Loam'
+'A - High Infiltration',
+'B - Moderate Infiltration',
+'C - Slow Infiltration',
+'D - Very Slow Infiltration'
 ]
 
 var data = [];
