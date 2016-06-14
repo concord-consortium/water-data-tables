@@ -67,7 +67,7 @@ function setupBarChart(options) {
   myNewChart.updateFromData = function() {
     // update the data sections of the chartData.datasets
     // recreate the chart
-    data.forEach(function(row, index){
+    options.data.forEach(function(row, index){
       options.columnIndices.forEach(function(colIndex, datasetIndex){
         myNewChart.datasets[datasetIndex].bars[index].value = convertValue(row[colIndex]);
       });
