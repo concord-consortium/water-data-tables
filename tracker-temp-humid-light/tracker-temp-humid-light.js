@@ -13,6 +13,7 @@ var charts = [
   setupBarChart({
     data: data,
     headings: headings,
+    labels: labels,
     columnIndices: [2],
     dataSetColors: [ "rgb(207, 67, 0)"],
     numRows: labels.length,
@@ -21,6 +22,7 @@ var charts = [
   setupBarChart({
     data: data,
     headings: headings,
+    labels: labels,
     columnIndices: [3],
     dataSetColors: [ "rgb(207, 67, 0)"],
     numRows: labels.length,
@@ -29,6 +31,7 @@ var charts = [
   setupBarChart({
     data: data,
     headings: headings,
+    labels: labels,
     columnIndices: [4],
     dataSetColors: [ "rgb(207, 67, 0)"],
     numRows: labels.length,

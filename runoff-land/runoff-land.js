@@ -19,6 +19,7 @@ var data = [];
 var charts = [
   setupBarChart({
     data: data,
+    labels: labels,
     headings: headings,
     dataSetColors: [ "rgb(194, 211, 60)", "rgb(207, 67, 0)", "rgb(248, 170, 0)"],
     columnIndices: [1,2,3],

@@ -38,7 +38,7 @@ function setupBarChart(options) {
   Chart.defaults.global.animation = false;
 
   var chartData1 = {
-      labels: labels,
+      labels: options.labels,
       datasets: setupDatasetConfigs()
   };
 
@@ -53,7 +53,7 @@ function setupBarChart(options) {
     if(value == null){
       return value;
     }
-    var result = parseInt(value);
+    var result = parseFloat(value);
     if(isNaN(result)){
       return null;
     }
@@ -77,6 +77,16 @@ function setupBarChart(options) {
   }
 
   return myNewChart;
+}
+
+function initializeTableData(data, labels, numValues) {
+  labels.forEach(function(label){
+    row = [label]
+    for(var i=0; i<numValues; i++){
+      row.push(null);
+    }
+    data.push(row);
+  });
 }
 
 /**
@@ -121,16 +131,6 @@ function setupTable(options) {
       })
     }
   });
-
-  function initializeTableData(data, labels, numValues) {
-    labels.forEach(function(label){
-      row = [label]
-      for(var i=0; i<numValues; i++){
-        row.push(null);
-      }
-      data.push(row);
-    });
-  }
 
   return hot;
 }
